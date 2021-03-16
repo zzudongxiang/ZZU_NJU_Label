@@ -88,6 +88,7 @@ function upload(data) {
     let httpRequest = new XMLHttpRequest();
     let statuscheck = 0;
     data = { "Key": filename, "Value": JSON.stringify(data[0]) }
+    openBox('#loading', true);
     httpRequest.open('POST', url);
     httpRequest.setRequestHeader("Content-type", "application/json");
     httpRequest.send(JSON.stringify(data));

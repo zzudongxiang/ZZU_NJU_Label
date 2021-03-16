@@ -3,7 +3,7 @@ import uuid
 import os
 
 # 待处理的文件所在的文件路径
-FilePath = "D:/Data/Seafile/01_Olympus_Pictures"
+FilePath = "data/"
 # 将图片复制到指定路径
 CopyPath = "data/src/"
 # 允许的图片文件类型
@@ -32,6 +32,10 @@ def GetFileList(FilePath, FileList=[]):
 
 # 主程序
 if __name__ == "__main__":
+    print("请输入图片所在父路径：")
+    TempPath = input()
+    if (os.path.isdir(TempPath)):
+        FilePath = TempPath
     FileList = GetFileList(FilePath)
     print("在 %s 中共计发现 %d 张图片" % (FilePath, len(FileList)))
     print("输入 y/yes 开始处理:")
