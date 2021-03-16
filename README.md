@@ -15,9 +15,9 @@ sudo apt install -y php-mysql php-xml php-mbstring php-gd
 
 - **创建数据库`Material`**
 
-- **可选：手动执行`./php/install.sql`脚本**
+- **手动执行`./php/install.sql`脚本**
 
-- **打开`/install.php`页面配置数据库相关信息**
+- **修改`./php/mysql.json`配置数据库相关信息**
 
 - **将待处理的全部图片放在`./data/src/`路径下**
 
