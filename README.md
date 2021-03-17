@@ -8,16 +8,10 @@ sudo apt install -y apache2
 # 安装php
 sudo apt install -y php
 # 安装php插件
-sudo apt install -y php-mysql php-xml php-mbstring php-gd
+sudo apt install -y php-xml php-mbstring php-gd
 ```
 
 ### 2. 安装帮助
-
-- **创建数据库`Material`**
-
-- **手动执行`./php/install.sql`脚本**
-
-- **修改`./php/mysql.json`配置数据库相关信息**
 
 - **将待处理的全部图片放在`./data/src/`路径下**
 
