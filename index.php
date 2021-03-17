@@ -6,17 +6,14 @@
         if(!empty($FileList))
         {
             require_once dirname(__FILE__)."/php/image.php";
+            
             // 从src中随机拿出一个文件, 并将其移动到images文件夹中
-            $FileName = $FileList[array_rand($FileList)];
-            $FileInfo = pathinfo($FileName);
+            $FilePath = $FileList[array_rand($FileList)];
+            $FileInfo = pathinfo($FilePath);
             $DirPath = $FileInfo["dirname"];
-            $Suffix = ".".substr(strrchr($FileInfo["basename"], '.'), 1);
-            mt_srand((double)microtime() * 10000);
-            $GUID = strtolower(md5(uniqid(rand(), true))).$Suffix;
-            (new image($FileName, 0.5)) -> compressImg($DirPath."/../tmp/".$GUID);
-            echo "<srcipt> alert('". $DirPath."/../tmp/".$GUID."');</script>";
-            rename($FileName, $DirPath."/../images/".$GUID);
-            $FileName = $GUID;
+            $FileName = $FileInfo["basename"];
+            (new image($FilePath, 0.5)) -> compressImg($DirPath."/../tmp/".$FileName);
+            rename($FilePath, "$DirPath/../images/$FileName");
 
             // 将记录写入到数据库中
             require_once dirname(__FILE__)."/php/core.php";
@@ -74,7 +71,7 @@
                 <div class="assistTool">
                     <div class="generalFeatures">
                         <p class="featureList crossLine" title="十字线开关">
-                            <input class="mui-switch mui-switch-anim" type="checkbox" checked="true">
+                            <input class="mui-switch mui-switch-anim" type="checkbox">
                             <span>十字线</span>
                         </p>
                         <p class="featureList labelShower focus" title="标注结果显示开关">

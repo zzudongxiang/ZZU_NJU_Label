@@ -140,13 +140,13 @@ class LabelImage {
             // 拖动开关
             dragOn: false,
             // 矩形标注开关
-            rectOn: false,
+            rectOn: true,
             // 多边形标注开关
-            polygonOn: true,
+            polygonOn: false,
             // 标签管理工具
             tagsOn: false,
             // 十字线开关
-            crossOn: false,
+            crossOn: true,
             // 标注结果显示
             labelOn: true,
         };

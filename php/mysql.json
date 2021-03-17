@@ -1,1 +1,7 @@
-{"Host":"localhost","UserName":"root","PassWord":"zzudongxiang@163.com","DB_Name":"material","Encode":"utf8"}
+{
+    "Host": "localhost",
+    "UserName": "root",
+    "PassWord": "zzudongxiang@163.com",
+    "DB_Name": "Material",
+    "Encode": "utf8"
+}
