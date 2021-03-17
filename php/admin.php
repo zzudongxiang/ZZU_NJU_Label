@@ -76,7 +76,7 @@
                 foreach($ImageList as $Temp) 
                 {
                     $Temp = basename($Temp);
-                    $WebImage .= "<a target='view_window' class='text' href='data/images/$Temp'>$Temp</a>";
+                    $WebImage .= "<a target='view_window' class='text' href='/data/images/$Temp'>$Temp</a>";
                 }
             }
             $WebJson = "";
@@ -85,7 +85,7 @@
                 foreach($JsonList as $Temp) 
                 {
                     $Temp = basename($Temp);
-                    $WebJson .= "<a target='view_window' class='text' href='data/json/$Temp'>$Temp</a>";
+                    $WebJson .= "<a target='view_window' class='text' href='/data/json/$Temp'>$Temp</a>";
                 }
             }
             $WebSrc = "";
@@ -94,7 +94,7 @@
                 foreach($SrcList as $Temp) 
                 {
                     $Temp = basename($Temp);
-                    $WebSrc .= "<a target='view_window' class='text' href='data/src/$Temp'>$Temp</a>";
+                    $WebSrc .= "<a target='view_window' class='text' href='/data/src/$Temp'>$Temp</a>";
                 }
             }
             $Install = "";

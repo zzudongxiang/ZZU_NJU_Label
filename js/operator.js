@@ -34,20 +34,14 @@ const processSum = document.querySelector('.processSum');               // 当�
 window.addEventListener("keydown", function (e) {
     if (e.key == "s" && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
         e.preventDefault();
-        if (annotate.Arrays.imageAnnotateMemory.length > 0) {
-            upload(annotate.Arrays.imageAnnotateMemory);
-            return true;
-        }
-        else {
-            alert('当前图片未有有效的标定数据');
-            return false;
-        }
+        upload(annotate.Arrays.imageAnnotateMemory);
+        return true;
     }
 }, false);
 
 // 跳过当前图片
 document.getElementById('break').onclick = function () {
-    upload({});
+    upload(annotate.Arrays.imageAnnotateMemory);
 }
 
 // 手动提交图片
