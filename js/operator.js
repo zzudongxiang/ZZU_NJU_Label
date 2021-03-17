@@ -84,7 +84,7 @@ tool.addEventListener('click', function (e) {
 // 将数据上传到服务器
 function upload(data) {
     let filename = taskName.textContent;
-    let url = window.location.href + 'upload.php';
+    let url = window.location.href + '/php/upload.php';
     let httpRequest = new XMLHttpRequest();
     let statuscheck = 0;
     data = { "Key": filename, "Value": JSON.stringify(data) }

@@ -1,7 +1,6 @@
 <?php
     try
     {
-        require_once dirname(__FILE__)."/php/core.php";
         $FileList = glob(dirname(__FILE__).'/data/src/*');
         if(!empty($FileList))
         {
@@ -14,12 +13,6 @@
             $FileName = $FileInfo["basename"];
             (new image($FilePath, 0.5)) -> compressImg($DirPath."/../tmp/".$FileName);
             rename($FilePath, "$DirPath/../images/$FileName");
-
-            // 将记录写入到数据库中
-            require_once dirname(__FILE__)."/php/core.php";
-            $UpdateTime = date('Y-m-d H:i:s', time());
-            $Query = "INSERT INTO `FileList` (`UpdateTime`, `FileName`) VALUES ('$UpdateTime', '$FileName') ON DUPLICATE KEY UPDATE `Status` = 0;";
-            ExecuteNonQuery($Query); 
         }
         else $FileName = "../../images/sample.png";
         $Install = "";
@@ -102,8 +95,8 @@
                 <div id="tools">
                     <div class="toolSet toolDrag" title="图片拖拽"></div>
                     <div class="toolSet toolTagsManager"><span class="icon-tags"></span></div>
-                    <div class="toolSet toolRect" title="矩形工具"></div>
-                    <div class="toolSet toolPolygon focus" id="default-btn" title="多边形工具"></div>
+                    <div class="toolSet toolRect focus" title="矩形工具"></div>
+                    <div class="toolSet toolPolygon" title="多边形工具"></div>
                 </div>
             </div>
             <div class="canvasContent">

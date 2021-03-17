@@ -2,11 +2,10 @@
     try
     {
         // 获取对应的文件列表与对应的总数
-        require_once dirname(__FILE__)."/php/core.php";
-        $ImageList = glob(dirname(__FILE__)."/data/images/*");
-        $JsonList = glob(dirname(__FILE__)."/data/json/*");
-        $SrcList = glob(dirname(__FILE__)."/data/src/*");
-        $TempList = glob(dirname(__FILE__)."/data/tmp/*");
+        $ImageList = glob(dirname(__FILE__)."/../data/images/*");
+        $JsonList = glob(dirname(__FILE__)."/../data/json/*");
+        $SrcList = glob(dirname(__FILE__)."/../data/src/*");
+        $TempList = glob(dirname(__FILE__)."/../data/tmp/*");
         $ImageCount = count($ImageList);
         $JsonCount = count($JsonList);
         $SrcCount = count($SrcList);
@@ -15,10 +14,6 @@
         // 清理数据功能
         if($_GET["Op"] == "Clear")
         {
-            // 创建删除数据表的sql语句
-            $DeleteQuery = "DELETE FROM `FileList` WHERE `FileName` LIKE ':ID';";
-            $Param = [":FileName" => "tmp"];
-
             // 复原对应的图像数据与多余的Json文件
             $ClearIndex = 0;
             $TempJsonList = $JsonList;
@@ -41,9 +36,7 @@
                 {
                     // 还原图像文件位置, 并清除数据库中的数据
                     $FileName = basename($Image);
-                    rename($Image, dirname(__FILE__).'/data/src/'.$FileName);
-                    $Param[":FileName"] = $FileName;
-                    ExecuteNonQuery($DeleteQuery, $Param);
+                    rename($Image, dirname(__FILE__).'/../data/src/'.$FileName);
                     $ClearIndex += 1;
                 }
             }
@@ -51,8 +44,6 @@
             // 清除json文件对应的数据
             foreach($TempJsonList as $Json)
             {
-                $Param[":FileName"] = json_decode(file_get_contents($Json), true)["ImageName"];
-                ExecuteNonQuery($DeleteQuery, $Param);
                 unlink($Json);
                 $ClearIndex += 1;
             }
@@ -60,17 +51,12 @@
             // 清除tmp的缓存文件
             foreach($TempList as $Temp)
             {
-                $Param[":FileName"] = basename($Temp);
-                ExecuteNonQuery($DeleteQuery, $Param);
                 unlink($Temp);
                 $ClearIndex += 1;
             }
 
-            // 清理数据库数据
-            ExecuteNonQuery("DELETE FROM `FileList` WHERE `Status` = 0;");
-
             // 输出信息
-            $Msg = "<script>alert('共计处理了 $ClearIndex  条数据！');location.href='/admin.php';</script>";
+            $Msg = "<script>alert('共计处理了 $ClearIndex  条数据！');location.href='/php/admin.php';</script>";
         }
         else
         {
@@ -78,15 +64,10 @@
             $Query = "SELECT COUNT(*) FROM `FileList` WHERE `Status` = 0;";
             $Msg = "<h1>======= 当前处理进度 =======</h1><h2>";
             $Msg .= "<span style='color:#f6033c'>待处理：$SrcCount 个</span> / ";
-            $Msg .= "<span style='color:#f89a26'>在处理：".GetSingleResult($Query)." 个</span> / ";
             $Msg .= "<span style='color:#689a39'>已处理：$JsonCount 个</span></h2>";
 
             // 显示文件汇总信息
-            $Msg .= "<h4>图片文件: $ImageCount 个 | 数据文件: $JsonCount 个 | 临时文件: $TempCount 个 | ";
-            if($TempCount > 0)
-                $Msg .= "当前<b style='color:#f89a26'>急需清理 ×</b>";
-            else
-                $Msg .= "当前<b style='color:#3e9a38'>无需清理 √</b></h4>";
+            $Msg .= "<h4>图片文件: $ImageCount 个 | 数据文件: $JsonCount 个 | 临时文件: $TempCount 个";
 
             // 显示文件列表
             $WebImage = "";
@@ -195,7 +176,7 @@
     </div>
     <h1> ======= 可执行的操作 ======= </h1>
     <span>
-        <button type="button" onclick="location.href='/admin.php?Op=Clear'"> >>清理数据<< </button>
+        <button type="button" onclick="location.href='/php/admin.php?Op=Clear'"> >>清理数据<< </button>
                 <button type="button" onclick="location.href='/'"> >>返回主页<< </button>
     </span>
     <h3>
