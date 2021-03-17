@@ -47,8 +47,7 @@ window.addEventListener("keydown", function (e) {
 
 // 跳过当前图片
 document.getElementById('break').onclick = function () {
-    if (confirm("确认跳过当前图片？"))
-        upload({});
+    upload({});
 }
 
 // 手动提交图片
